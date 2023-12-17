@@ -1,21 +1,17 @@
 package ru.kata.spring.boot_security.demo.model;
 
-
-
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.Collection;
-import java.util.HashSet;
 
 @Entity
 @Table(name = "users")
@@ -32,18 +28,14 @@ public class User implements UserDetails {
     @NotEmpty(message = "Name should not be empty")
     @Size( min = 2, max = 30, message = "Фамилия от 2 до 30 символов")
     private String surname;
-    @Column(name = "salary")
-//    @Min( value = 100, message = "Ой...это что ж за работа? тебе не стыдно? ")
-//    @Max( value = 1000000, message = "Нет, тут столько зарабатывать не зарзрешают...Скромнее, пожалуйста")
-    private int salary;
+
     @Column(name = "age")
-//    @Min( value = 13, message = "Возраст не может быть меньше 13 ")
-//    @Max( value = 90, message = "Возраст не может быть больше 90")
+    @Min( value = 13, message = "Возраст не может быть меньше 13 ")
+    @Max( value = 90, message = "Возраст не может быть больше 90")
     private int age;
     @NotEmpty(message = "введите почту, пожалуйста")
     private String email;
-    @NotEmpty(message = "Username should not be empty")
-    private String username;
+
     @NotEmpty(message = "Pass should not be empty")
     private String password;
 
@@ -66,9 +58,7 @@ public class User implements UserDetails {
         this.id = id;
         this.name = name;
         this.surname = surname;
-        this.salary = salary;
         this.age = age;
-        this.username = username;
         this.password = password;
         this.roles = roles;
     }
@@ -103,18 +93,6 @@ public class User implements UserDetails {
         this.surname = surname;
     }
 
-    public int getSalary() {
-        return salary;
-    }
-
-    public void setSalary(int salary) {
-        this.salary = salary;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public void setPassword(String password) {
         this.password = password;
     }
@@ -129,7 +107,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return username;
+        return email;
     }
 
     @Override
@@ -165,13 +143,7 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return false;
     }
-    public void addRole(Role role) {
-        if (this.roles == null) {
-            this.roles = new HashSet<>();
-        }
-        this.roles.add(role);
 
-    }
 
     public String getEmail() {
         return email;
@@ -187,10 +159,7 @@ public class User implements UserDetails {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", salary=" + salary +
                 ", email='" + email + '\'' +
-                ", username='" + username + '\'' +
-//                ", password='" + password + '\'' +
                 ", roles=" + roles +
                 '}';
     }

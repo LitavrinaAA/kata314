@@ -11,159 +11,6 @@
 </head>
 <body>
 
-<!-- up Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <!--                <form th:action="@{/updateUser}" method="post">-->
-                <form>
-                    <input type="hidden" name="userId" class="user-id">
-                    <div class="mb-3 row">
-                        <label for="disabledName" class="col-sm-2 col-form-label">Имя пользователя</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control user-username" id="disabledName" disabled
-                                   readonly>
-                        </div>
-                    </div>
-
-                    <div class="mb-3 row">
-                        <label for="name" class="col-sm-2 col-form-label">Имя</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control user-name" id="name">
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label for="surName" class="col-sm-2 col-form-label ">Фамилия</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control user-sur-name" id="surName">
-                        </div>
-                    </div>
-                    <!--                    <div class="mb-3 row">-->
-                    <!--                        <label for="salary" class="col-sm-2 col-form-label">Зарплата</label>-->
-                    <!--                        <div class="col-sm-10">-->
-                    <!--                            <input type="text" class="form-control user-salary" id="salary">-->
-                    <!--                        </div>-->
-                    <!--                    </div>-->
-                    <div class="mb-3 row">
-                        <label for="age" class="col-sm-2 col-form-label">Возраст</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control user-age" id="age">
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label for="exampleInputEmail1" class="col-sm-2 col-form-label">Email address</label>
-                        <div class="col-sm-10">
-                            <input type="email" class="form-control user-email" id="exampleInputEmail1"
-                                   aria-describedby="emailHelp">
-                            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                        </div>
-                    </div>
-
-                    <div class="mb-3 row">
-                        <label for="exampleInputPassword1" class="col-sm-2 col-form-label">Пароль</label>
-                        <div class="col-sm-10">
-                            <input type="password" class="form-control user-password" id="exampleInputPassword1">
-                        </div>
-                    </div>
-
-
-                    <select class="form-select user-roles" multiple aria-label="multiple select example">
-                        <div th:each="role : ${allRoles}">
-                            <option th:utext="${role.getName()}" th:value="${role.getId()}"></option>
-                        </div>
-                    </select>
-
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary save-button" th:data-bs-save-user="${user.id}"
-                        id="save-user-button">Save changes
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- delModal -->
-<div class="modal fade" id="delModal" tabindex="-1" aria-labelledby="delModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="del-modal-title" id="delModalLabel">Modal title</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <!--                <form th:action="@{/updateUser}" method="post">-->
-                <form>
-                    <fieldset disabled>
-                        <input type="hidden" name="userId" class="del-user-id">
-                        <div class="mb-3 row">
-                            <label for="disabledDelName" class="col-sm-2 col-form-label">Имя пользователя</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control del-user-username" id="disabledDelName">
-                            </div>
-                        </div>
-
-                        <div class="mb-3 row">
-                            <label for="delnName" class="col-sm-2 col-form-label">Имя</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control del-user-name" id="delnName">
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <label for="delSurName" class="col-sm-2 col-form-label ">Фамилия</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control del-user-sur-name" id="delSurName">
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <label for="delAge" class="col-sm-2 col-form-label">Зарплата</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control del-user-age" id="delAge">
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <label for="delInputEmail1" class="col-sm-2 col-form-label">Email address</label>
-                            <div class="col-sm-10">
-                                <input type="email" class="form-control del-user-email" id="delInputEmail1"
-                                       aria-describedby="delEmailHelp">
-                                <div id="delEmailHelp" class="form-text">We'll never share your email with anyone else.
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--                    <div class="mb-3 row">-->
-                        <!--                        <label for="delInputPassword1" class="col-sm-2 col-form-label">Пароль</label>-->
-                        <!--                        <div class="col-sm-10">-->
-                        <!--                            <input type="password" class="form-control user-password" id="delInputPassword1" disabled-->
-                        <!--                                   readonly>-->
-                        <!--                        </div>-->
-                        <!--                    </div>-->
-
-
-                        <select class="form-select user-roles" multiple aria-label="multiple select example">
-                            <div th:each="role : ${allRoles}">
-                                <option th:utext="${role.getName()}" th:value="${role.getId()}"></option>
-                            </div>
-                        </select>
-                    </fieldset>
-
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary del-button" th:data-bs-save-user="${user.id}"
-                        id="del-user-button">Delete User
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
 
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -193,7 +40,7 @@
 <div class="container">
 
     <div class="row">
-        <div class="col-3 ">
+        <div class="col-2 ">
             <nav class="nav mt-3 nav-pills flex-column ">
                 <div th:each="role, iterStat : ${admin.getRoles()}">
                     <div th:if="${role.getNoPrefix().equals('ADMIN')}">
@@ -209,7 +56,7 @@
         </div>
 
 
-        <div class="col-7">
+        <div class="col-10">
 
             <div class="p-3 mb-2 bg-light text-dark">
                 <p class="fw-bold fs-4">Admin panel</p>
@@ -246,7 +93,7 @@
 
                             <tbody>
 
-                            <tr th:each="user : ${allUsers}">
+                            <tr th:each="user, status  : ${allUsers}">
                                 <td th:utext="${user.getId()}"></td>
                                 <td th:utext="${user.getName()}"></td>
                                 <td th:utext="${user.getSurname()}"></td>
@@ -258,35 +105,252 @@
                                         <span th:if="${!iterStat.last}">, </span>
                                     </span>
                                 </td>
-
                                 <td>
-
-                                    <!--                                    <form action="#" data-th-action="@{admin/updateUser}" method="post">-->
-                                    <!--                                        <input type="hidden" name="userId" th:value="${user.getId()}"/>-->
-                                    <!--                                        <button type="submit" name="action" value="Update">Update</button>-->
-                                    <!--                                    </form>-->
-
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                            data-bs-target="#exampleModal" th:data-bs-whatever="${user.id}">
+                                    <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                            th:data-bs-target="${'#updateModal'+user.getId()}">
                                         Обновить
                                     </button>
-
-
                                 </td>
+
+                                <form action="#" data-th-action="@{|/admin/userEdit/${user.getId()}|}" method="post"
+                                      th:object="${user}">
+
+                                    <div class="modal fade" th:id="${'updateModal'+user.getId()}" tabindex="-1"
+                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Обновить пользователя </h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+
+                                                    <!--форма-->
+                                                    <div class="mb-3 row text-center">
+                                                        <label for="id" class="form-label fw-bold">ID</label>
+                                                        <div class="col-sm-10 mx-auto">
+
+                                                            <input type="text" class="form-control user-id"
+                                                                   th:value="${user.getId()}"
+                                                                   th:name="id"
+                                                                   id="id" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <input type="hidden" th:name="username"
+                                                           th:value="${user.getUsername()}"
+                                                           class="user-username">
+
+
+                                                    <div class="mb-3 row text-center">
+                                                        <label for="name" class="form-label fw-bold">Имя</label>
+                                                        <div class="col-sm-10 mx-auto">
+                                                            <!--field - появляется в контроллере, но -->
+                                                            <input type="text" class="form-control user-name"
+                                                                   th:value="${user.getName()}"
+                                                                   th:name="name"
+                                                                   id="name">
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3 row text-center">
+                                                        <label for="surName" class="form-label fw-bold">Фамилия</label>
+                                                        <div class="col-sm-10 mx-auto">
+                                                            <input type="text" class="form-control user-sur-name"
+                                                                   th:value="${user.getSurname()}"
+                                                                   th:name="surname"
+                                                                   id="surName">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="mb-3 row text-center">
+                                                        <label for="age" class="form-label fw-bold">Возраст</label>
+                                                        <div class="col-sm-10 mx-auto">
+                                                            <input type="text" class="form-control user-age"
+                                                                   th:value="${user.getAge()}"
+                                                                   th:name="age"
+                                                                   id="age">
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3 row text-center">
+                                                        <label for="exampleInputEmail1" class="form-label fw-bold">Email
+                                                            address</label>
+                                                        <div class="col-sm-10 mx-auto">
+                                                            <input type="email" class="form-control user-email"
+                                                                   th:value="${user.getEmail()}"
+                                                                   th:name="email"
+                                                                   id="exampleInputEmail1"
+                                                                   aria-describedby="emailHelp">
+                                                            <div id="emailHelp" class="form-text">We'll never share your
+                                                                email with anyone else.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3 row text-center">
+                                                        <label for="delInputPassword1"
+                                                               class="form-label fw-bold">Пароль</label>
+                                                        <div class="col-sm-10 mx-auto">
+                                                            <input type="password" class="form-control user-password"
+                                                                   th:value="${user.getPassword()}"
+                                                                   th:name="password"
+                                                                   id="delInputPassword1">
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3 row text-center">
+                                                        <label for="delInputPassword1"
+                                                               class="form-label fw-bold">Роли:</label>
+                                                        <div class="col-sm-10 mx-auto">
+                                                            <select class="form-select user-roles" multiple
+                                                                    aria-label="multiple select example"
+                                                                    th:name="roles">
+                                                                <div th:each="role : ${allRoles}">
+                                                                    <option th:utext="${role.getName()}"
+                                                                            th:value="${role.getId()}"
+                                                                            th:selected="${user.roles.contains(role)}"
+                                                                    ></option>
+                                                                </div>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <!--  конец формы -->
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Close
+                                                    </button>
+                                                    <button type="submit" class="btn btn-primary save-button"
+                                                            id="save-user-button" th:object="${user.getId()}">Save
+                                                        changes
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
                                 <td>
-                                    <!--                                    <form action="#" data-th-action="@{admin/deleteUser}" method="post">-->
-                                    <!--                                        <input type="hidden" name="userId" th:value="${user.getId()}"/>-->
-                                    <!--                                        <button type="submit" name="action" value="Delete">Delete</button>-->
-                                    <!--                                    </form>-->
                                     <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                            data-bs-target="#delModal" th:data-bs-whatever="${user.id}">
+                                            th:data-bs-target="${'#delModal'+user.getId()}">
                                         Удалить
                                     </button>
-
-                                    <!--                                    <button type="button" class="btn btn-danger" th:data-bs-whatever="${user.id}">-->
-                                    <!--                                        Удалить-->
-                                    <!--                                    </button>-->
                                 </td>
+                                <!-- delModal -->
+                                <form action="#" data-th-action="@{|/admin/userDelete/${user.getId()}|}">
+                                    <input type="hidden" name="userId" th:value="${user.getId()}"/>
+
+                                    <div class="modal fade" th:id="${'delModal'+user.getId()}" tabindex="-1"
+                                         aria-labelledby="delModalLabel" aria-hidden="true">
+
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="del-modal-title" id="delModalLabel">Удаление
+                                                        пользователя</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body  ">
+
+                                                    <!--форма-->
+                                                    <fieldset disabled>
+
+                                                        <div class="mb-3 row">
+                                                            <label for="del-id"
+                                                                   class="form-label fw-bold text-center">ID</label>
+                                                            <div class="col-sm-10 mx-auto">
+                                                                <!--field - появляется в контроллере, но -->
+                                                                <input type="text" class="form-control user-id"
+                                                                       th:value="${user.getId()}"
+                                                                       th:name="id"
+                                                                       id="del-id" readonly>
+                                                            </div>
+                                                        </div>
+                                                        <input type="hidden" th:name="username"
+                                                               th:value="${user.getUsername()}"
+                                                               class="user-username">
+
+
+                                                        <div class="mb-3 row">
+                                                            <label for="del-name"
+                                                                   class="form-label fw-bold text-center">Имя</label>
+                                                            <div class="col-sm-10 mx-auto">
+                                                                <!--field - появляется в контроллере, но -->
+                                                                <input type="text" class="form-control user-name"
+                                                                       th:value="${user.getName()}"
+                                                                       th:name="name"
+                                                                       id="del-name">
+                                                            </div>
+                                                        </div>
+                                                        <div class="mb-3 row">
+                                                            <label for="del-surName"
+                                                                   class="form-label fw-bold text-center">Фамилия</label>
+                                                            <div class="col-sm-10 mx-auto">
+                                                                <input type="text" class="form-control user-sur-name"
+                                                                       th:value="${user.getSurname()}"
+                                                                       th:name="surname"
+                                                                       id="del-surName">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="mb-3 row">
+                                                            <label for="del-age"
+                                                                   class="form-label fw-bold text-center">Возраст</label>
+                                                            <div class="col-sm-10 mx-auto">
+                                                                <input type="text" class="form-control user-age"
+                                                                       th:value="${user.getAge()}"
+                                                                       th:name="age"
+                                                                       id="del-age">
+                                                            </div>
+                                                        </div>
+                                                        <div class="mb-3 row">
+                                                            <label for="del-exampleInputEmail1"
+                                                                   class="form-label fw-bold text-center">Email
+                                                                address</label>
+                                                            <div class="col-sm-10 mx-auto">
+                                                                <input type="email" class="form-control user-email"
+                                                                       th:value="${user.getEmail()}"
+                                                                       th:name="email"
+                                                                       id="del-exampleInputEmail1"
+                                                                       aria-describedby="emailHelp">
+                                                                <div id="del-emailHelp" class="form-text">We'll never
+                                                                    share your
+                                                                    email with anyone else.
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="mb-3 row text-center ">
+                                                            <label for="roles" class="form-label fw-bold"> Роли:</label>
+                                                            <div class="col-sm-10 mx-auto">
+                                                                <select id="roles" class="form-select user-roles"
+                                                                        multiple
+                                                                        aria-label="multiple select example"
+                                                                        th:name="roles">
+                                                                    <div th:each="role : ${allRoles}">
+                                                                        <option th:utext="${role.getName()}"
+                                                                                th:value="${role.getId()}"
+                                                                                th:selected="${user.roles.contains(role)}"
+                                                                        ></option>
+                                                                    </div>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <!--                                                   конец формы-->
+                                                    </fieldset>
+
+                                                    <!--                                                   конец формы-->
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Close
+                                                    </button>
+                                                    <button type="submit" class="btn btn-danger"
+                                                    >Delete User
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
                             </tr>
                             </tbody>
 
@@ -300,8 +364,10 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
+        crossorigin="314"></script>
 </body>
+<!-- up Modal -->
+
 
 <!--<script>-->
 <!--    var exampleModal = document.getElementById('exampleModal')-->
@@ -339,10 +405,11 @@
 <!--        modalBodyInput.value = recipient-->
 <!--    })-->
 <!--</script>-->
-<script type="text/javascript" src="modal.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
+<!--<script type="text/javascript" src="modal.js"></script>-->
+
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"-->
+<!--        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"-->
+<!--        crossorigin="anonymous"></script>-->
 
 </body>
 </html>

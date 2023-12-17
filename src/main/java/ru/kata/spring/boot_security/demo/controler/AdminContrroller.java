@@ -31,22 +31,24 @@ public class AdminContrroller {
                           @ModelAttribute("user") User user,
                           Principal principal) {
         User admin = userService.getUser(principal.getName());
-//        boolean isContainAdmin = admin.getRoles().contains("ADMIN");
-//        boolean isContainUser = admin.getRoles().contains("2");
         model.addAttribute("allUsers", userService.findAll());
         model.addAttribute("allRoles", roleService.getRolesList());
+        model.addAttribute("user", new User());
         model.addAttribute("admin", admin );
 
         return "all-users";
     }
-
+//форма нового пользователя
     @GetMapping("/addNewUser")
-    public String addNewUser(Model model) {
+    public String addNewUser(Model model,
+                             Principal principal) {
+        User admin = userService.getUser(principal.getName());
         model.addAttribute("user", new User());
         model.addAttribute("allRoles", roleService.getRolesList());
+        model.addAttribute("admin", admin );
         return "new";
     }
-
+//сохранение нового пользователя
     @PostMapping("/userNew/{id}")
     public String newUser(Model model,
                           @ModelAttribute("user") @Valid User user,
@@ -55,37 +57,29 @@ public class AdminContrroller {
             model.addAttribute("allRoles", roleService.getRolesList());
             return "new";
         }
-
         userService.saveUser(user);
         return "redirect:/admin";
     }
 
     @PostMapping("/userEdit/{id}")
-    public String editUser(@PathVariable("id") int id,
-                           Model model,
+    public String editUser( Model model,
                            @ModelAttribute("user") @Valid User user,
                            BindingResult bindingResult) {
+        System.out.println("просят обновить...");
         if (bindingResult.hasErrors()) {
             model.addAttribute("allRoles", roleService.getRolesList());
             return "edit";
         }
-
-        userService.updateUser(id, user);
+        userService.updateUser(user);
         return "redirect:/admin";
     }
 
-    @PostMapping("/deleteUser")
+    @GetMapping("/userDelete/{id}")
     public String deleteUser(@RequestParam("userId") long id) {
         System.out.println("deleteUser: " + id);
         userService.deleteUser(id);
         return "redirect:/admin";
     }
 
-    @PostMapping("/updateUser")
-    public String updateUser(@RequestParam("userId") long id, Model model) {
-        //как показать  пароль ?
-        model.addAttribute("user", userService.getUser(id));
-        model.addAttribute("allRoles", roleService.getRolesList());
-        return "edit";
-    }
+
 }

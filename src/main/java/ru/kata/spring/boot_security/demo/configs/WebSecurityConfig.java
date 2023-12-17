@@ -8,8 +8,13 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.UserService;
+
+import java.util.Optional;
 
 
 @Configuration
@@ -25,6 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+
     @Autowired
     public WebSecurityConfig(UserService userService, SuccessUserHandler successUserHandler) {
         this.userService = userService;
@@ -34,21 +40,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        http
-//                .csrf().disable()
-//                .authorizeRequests()
-//                .anyRequest().permitAll();
-//    }
+
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
-//                .antMatchers("/api/**").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/user").hasAnyRole("ADMIN", "USER")
                 .and()
                 .formLogin().successHandler(loginSuccessHandler)
+                .usernameParameter("email") //  email вместо username
                 .and()
                 .logout().logoutSuccessUrl("/")
-                .and().csrf().disable();
+        ;
 
     }
 

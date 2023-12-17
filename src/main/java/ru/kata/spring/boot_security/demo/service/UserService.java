@@ -1,7 +1,6 @@
 package ru.kata.spring.boot_security.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -33,26 +32,24 @@ public class UserService implements UserDetailsService {
         this.userRepository = userRepository;
     }
 
-    public User findByUsername(String username) {
-        return userRepository.findByUsername(username);
-    }
-
+    @Transactional //а она нужна?
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = findByUsername(username);
-        if (user == null) {
-            throw new UsernameNotFoundException(String.format("User '%s' not found", username));
-        }
-        UserDetails u_test = new org.springframework.security.core.userdetails.User(
-                user.getUsername(),
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = findUserByEmail(email).get(); //findByUsername(username);
+
+        return new org.springframework.security.core.userdetails.User(
+                user.getEmail(),
                 user.getPassword(),
                 mapRolesToAuthorities(user.getRoles()));
-
-        return u_test;
     }
 
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
         return roles.stream().map(r -> new SimpleGrantedAuthority(r.getName())).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public Optional<User> findUserByEmail(String email) {
+        return userRepository.findUserByEmail(email);
     }
 
     public List<User> findAll() {
@@ -64,7 +61,8 @@ public class UserService implements UserDetailsService {
         if (!user.getPassword().isEmpty()) {
             user.setPassword(getBCryptPasswordEncoder().encode(user.getPassword()));
         }
-        return userRepository.save(user);
+        userRepository.save(user);
+        return user;
     }
 
     @Transactional
@@ -77,28 +75,25 @@ public class UserService implements UserDetailsService {
         return user;
     }
 
-    public Optional<User> findById(long id) {
-        return userRepository.findById(id);
+
+    public User getUser(String email) {
+        return userRepository.findUserByEmail(email).get();
     }
 
-    public User getUser(String name) {
-
-        return userRepository.findByUsername(name);
-    }
 
     @Transactional
-    public User updateUser(int id, User user1) {
-
-            User userToBeUpdated = getUser(id);
-            userToBeUpdated.setName(user1.getName());
-            userToBeUpdated.setSurname(user1.getSurname());
-            userToBeUpdated.setAge(user1.getAge());
-            userToBeUpdated.setEmail(user1.getEmail());
-            if (!user1.getPassword().isEmpty()) {
-                userToBeUpdated.setPassword(getBCryptPasswordEncoder().encode(user1.getPassword()));
-            }
-            userToBeUpdated.setRoles(user1.getRoles());
-            return userRepository.save(userToBeUpdated);
+    public void updateUser(User user) {
+        User userToBeUpdated = getUser(user.getId());
+        userToBeUpdated.setName(user.getName());
+        userToBeUpdated.setSurname(user.getSurname());
+        userToBeUpdated.setAge(user.getAge());
+        userToBeUpdated.setEmail(user.getEmail());
+        if (!user.getPassword().isEmpty()) {
+            userToBeUpdated.setPassword(getBCryptPasswordEncoder().encode(user.getPassword()));
+        }
+        userToBeUpdated.setRoles(user.getRoles());
+        userRepository.save(userToBeUpdated);
 
     }
+
 }
