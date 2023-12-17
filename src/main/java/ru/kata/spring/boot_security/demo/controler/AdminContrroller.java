@@ -63,13 +63,7 @@ public class AdminContrroller {
 
     @PostMapping("/userEdit/{id}")
     public String editUser( Model model,
-                           @ModelAttribute("user") @Valid User user,
-                           BindingResult bindingResult) {
-        System.out.println("просят обновить...");
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("allRoles", roleService.getRolesList());
-            return "edit";
-        }
+                           @ModelAttribute("user") @Valid User user) {
         userService.updateUser(user);
         return "redirect:/admin";
     }
