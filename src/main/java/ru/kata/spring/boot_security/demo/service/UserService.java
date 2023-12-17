@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.repositories.UserRepository;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -21,21 +20,22 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserService implements UserDetailsService {
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    @Autowired
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public PasswordEncoder getBCryptPasswordEncoder() {
         return new BCryptPasswordEncoder(12);
     }
 
-    @Autowired
-    public void setUserRepository(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+
 
     @Transactional //а она нужна?
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = findUserByEmail(email).get(); //findByUsername(username);
+        User user = findUserByEmail(email).get();
 
         return new org.springframework.security.core.userdetails.User(
                 user.getEmail(),
@@ -57,12 +57,11 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public User saveUser(User user) {
+    public void  saveUser(User user) {
         if (!user.getPassword().isEmpty()) {
             user.setPassword(getBCryptPasswordEncoder().encode(user.getPassword()));
         }
         userRepository.save(user);
-        return user;
     }
 
     @Transactional
@@ -71,8 +70,7 @@ public class UserService implements UserDetailsService {
     }
 
     public User getUser(long id) {
-        User user = userRepository.getById(id);
-        return user;
+        return userRepository.getById(id);
     }
 
 

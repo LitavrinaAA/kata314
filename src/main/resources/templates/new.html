@@ -73,12 +73,10 @@
                     <div class="container" style="width: 18rem;">
                         <form th:method="POST" th:action="@{/admin/userNew/{id}(id=${user.getId()})}"
                               th:object="${user}">
-                            <input type="hidden" th:name="username" th:value="user"
-                                   class="user-username">
 
                             <div class="mb-2  text-center">
                                 <label for="name" class="form-label  fw-bold text-center">Введите имя:</label>
-                                <input type="text" class="form-control" th:field="*{name}" id="name">
+                                <input type="text" class="form-control" th:field="*{name}" id="name" required>
                                 <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name
                                     error
                                 </div>
@@ -86,7 +84,7 @@
 
                             <div class="mb-2 text-center">
                                 <label for="surname" class="form-label fw-bold">Введите фамилию:</label>
-                                <input type="text" class="form-control" th:field="*{surname}" id="surname">
+                                <input type="text" class="form-control" th:field="*{surname}" id="surname" required>
                                 <div style="color:red" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">
                                     Name error
                                 </div>
@@ -102,7 +100,7 @@
 
                             <div class="mb-2 text-center">
                                 <label for="email" class="form-label fw-bold"> email:</label>
-                                <input type="text" class="form-control" th:field="*{email}" id="email">
+                                <input type="text" class="form-control" th:field="*{email}" id="email" required>
                                 <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name
                                     error
                                 </div>
