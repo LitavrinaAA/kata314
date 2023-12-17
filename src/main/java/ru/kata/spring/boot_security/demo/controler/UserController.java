@@ -9,6 +9,7 @@ import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
 import java.security.Principal;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/user")
@@ -24,9 +25,17 @@ public class UserController {
 
     @GetMapping("")
     public String userInfoPage(Principal principal, Model model) {
-        User user = userService.findUserByEmail(principal.getName()).get();
-        model.addAttribute("user", user);
-        return "user";
+        Optional<User> userOptional = userService.findUserByEmail(principal.getName());
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            model.addAttribute("user", user);
+            return "user";
+        } else {
+            // Обработка ситуации, когда пользователь не найден
+            model.addAttribute("error", "User not found");
+            return "errorPage";
+        }
+
     }
 
 
