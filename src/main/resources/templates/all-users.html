@@ -163,10 +163,11 @@
                                                     <div class="mb-3 row text-center">
                                                         <label for="age" class="form-label fw-bold">Возраст</label>
                                                         <div class="col-sm-10 mx-auto">
-                                                            <input type="text" class="form-control user-age"
+                                                            <input type="number" class="form-control user-age"
                                                                    th:value="${user.getAge()}"
                                                                    th:name="age"
-                                                                   id="age">
+                                                                   id="age"
+                                                                   min="18" max="100" step="1">
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row text-center">

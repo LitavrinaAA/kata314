@@ -92,7 +92,7 @@
 
                             <div class="mb-2 text-center">
                                 <label for="age" class="form-label fw-bold"> Возраст:</label>
-                                <input type="text" class="form-control" th:field="*{age}" id="age">
+                                <input type="number" class="form-control" th:field="*{age}" id="age" min="18" max="100" step="1">
                                 <div style="color:red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Name
                                     error
                                 </div>
