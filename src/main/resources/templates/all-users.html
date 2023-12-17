@@ -36,7 +36,7 @@
     </nav>
 
 </header>
-<!--<div th:replace="header :: content"></div>-->
+
 <div class="container">
 
     <div class="row">
@@ -70,7 +70,6 @@
 
                 </ul>
 
-                <!--<input type ="button" value="Add" onclick="window.location.href = 'admin/addNewUser'"/>-->
                 <div class="card">
 
                     <div class="card-header">
@@ -249,26 +248,24 @@
                                                 </div>
                                                 <div class="modal-body  ">
 
-                                                    <!--форма-->
-                                                    <fieldset disabled>
 
+                                                    <fieldset disabled>
+                                                        <!--форма-->
                                                         <div class="mb-3 row">
                                                             <label for="del-id"
                                                                    class="form-label fw-bold text-center">ID</label>
                                                             <div class="col-sm-10 mx-auto">
-                                                                <!--field - появляется в контроллере, но -->
                                                                 <input type="text" class="form-control user-id"
                                                                        th:value="${user.getId()}"
                                                                        th:name="id"
                                                                        id="del-id" readonly>
                                                             </div>
                                                         </div>
-                                                       
+
                                                         <div class="mb-3 row">
                                                             <label for="del-name"
                                                                    class="form-label fw-bold text-center">Имя</label>
                                                             <div class="col-sm-10 mx-auto">
-                                                                <!--field - появляется в контроллере, но -->
                                                                 <input type="text" class="form-control user-name"
                                                                        th:value="${user.getName()}"
                                                                        th:name="name"
@@ -328,11 +325,8 @@
                                                                 </select>
                                                             </div>
                                                         </div>
-
-                                                        <!--                                                   конец формы-->
+                                                        <!-- конец формы-->
                                                     </fieldset>
-
-                                                    <!--                                                   конец формы-->
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
@@ -362,50 +356,7 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="314"></script>
 </body>
-<!-- up Modal -->
 
-
-<!--<script>-->
-<!--    var exampleModal = document.getElementById('exampleModal')-->
-<!--    exampleModal.addEventListener('show.bs.modal', function (event) {-->
-<!--        // Button that triggered the modal-->
-<!--        var button = event.relatedTarget-->
-<!--        // Extract info from data-bs-* attributes-->
-<!--        var recipient = button.getAttribute('data-bs-whatever')-->
-<!--        var userId = button.getAttribute('data-bs-userId');-->
-
-
-<!--        // If necessary, you could initiate an AJAX request here-->
-<!--        // and then do the updating in a callback.-->
-<!--        //-->
-<!--        // Update the modal's content.-->
-<!--        // if(userId) {-->
-<!--            $.get({-->
-<!--                url: '/api/user/' + 17,-->
-<!--                success: (data) => {-->
-<!--                    let modal = $(this)-->
-<!--                    // modal.find('#user-id').val(data.id)-->
-<!--                    modal.find('#surName').val(data.id)-->
-<!--                    // modal.find('#user-surname').val(data.password)-->
-<!--                },-->
-<!--                error: (err) => {-->
-<!--                    alert(err);-->
-<!--                }-->
-<!--            });-->
-<!--        // }-->
-<!--        var modalTitle = exampleModal.querySelector('.modal-title')-->
-<!--        var modalBodyInput = exampleModal.querySelector('.modal-body input')-->
-
-<!--        modalTitle.textContent = '"Гвоздь, который торчит, забивается".' + userId-->
-<!--        var userId = button.getAttribute('userId')-->
-<!--        modalBodyInput.value = recipient-->
-<!--    })-->
-<!--</script>-->
-<!--<script type="text/javascript" src="modal.js"></script>-->
-
-<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"-->
-<!--        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"-->
-<!--        crossorigin="anonymous"></script>-->
 
 </body>
 </html>
