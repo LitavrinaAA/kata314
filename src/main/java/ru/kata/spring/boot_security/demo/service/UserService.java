@@ -29,13 +29,11 @@ public class UserService implements UserDetailsService {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
-
-
-    @Transactional
+    
     public Optional<User> findUserByEmail(String email) {
         return userRepository.findUserByEmail(email);
     }
-    @Transactional
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Optional<User> userOptional = userRepository.findUserByEmail(email);
