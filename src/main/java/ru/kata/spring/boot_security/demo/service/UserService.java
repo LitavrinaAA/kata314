@@ -29,7 +29,7 @@ public class UserService implements UserDetailsService {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
-    
+
     public Optional<User> findUserByEmail(String email) {
         return userRepository.findUserByEmail(email);
     }
